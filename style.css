@@ -1,0 +1,54 @@
+html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #faf8f3;
+      }
+
+      .font-display {
+        font-family: "DM Serif Display", serif;
+      }
+      ::selection {
+        background: #f97316;
+        color: white;
+      }
+
+      @keyframes badge-float-left {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+
+      @keyframes badge-float-right {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(14px);
+        }
+      }
+
+      .float-budget {
+        animation: badge-float-left 4s ease-in-out infinite;
+      }
+
+      .float-dietary {
+        animation: badge-float-right 4.5s ease-in-out infinite;
+      }
+
+      /* Respect reduced-motion accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        .float-budget,
+        .float-dietary {
+          animation: none;
+        }
+      }
