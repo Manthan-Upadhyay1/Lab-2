@@ -5,33 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DineMate AI</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              navy: "#0B1F33",
-              navyLight: "#16344D",
-              cream: "#FAF8F3",
-              orange: "#F97316",
-              orangeLight: "#FFEDD5",
-              coral: "#EA580C",
-              green: "#15803D",
-            },
-
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-              display: ["DM Serif Display", "serif"],
-            },
-
-            boxShadow: {
-              soft: "0 10px 40px rgba(11, 31, 51, 0.08)",
-              card: "0 8px 30px rgba(11, 31, 51, 0.06)",
-            },
-          },
-        },
-      };
-    </script>
     <link rel="stylesheet" href="style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,12 +21,132 @@
     />
   </head>
   <body class="text-navy">
+    <div id="loader">
+      <svg
+        id="dinemate-loader"
+        class="dinemate-loader"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 250 90"
+        width="250"
+        height="90"
+        role="img"
+        aria-labelledby="dinemate-loader-title"
+      >
+        <!-- Accessible title -->
+        <title id="dinemate-loader-title">DineMate AI</title>
+
+        <!-- =========================================
+       LOADER CARD
+  ========================================== -->
+        <g id="loader-card" class="loader-card">
+          <rect
+            id="card-background"
+            class="card-background"
+            x="1"
+            y="8"
+            width="248"
+            height="74"
+            rx="16"
+            fill="#FAF8F3"
+            stroke="#EFEBE3"
+            stroke-width="1"
+          />
+        </g>
+
+        <!-- =========================================
+       APP ICON
+  ========================================== -->
+        <g id="icon-bg" class="loader-icon">
+          <!-- Orange icon background -->
+          <rect
+            id="icon-background"
+            class="icon-background"
+            x="24"
+            y="25"
+            width="40"
+            height="40"
+            rx="10"
+            fill="#F97316"
+          />
+
+          <!-- =========================================
+         UTENSILS
+    ========================================== -->
+          <g
+            id="utensils"
+            class="utensils"
+            transform="translate(30.8 31.8) scale(1.1)"
+            fill="none"
+            stroke="#FFFFFF"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <!-- Fork -->
+            <g id="fork" class="fork">
+              <path
+                id="fork-head"
+                class="fork-head"
+                d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"
+              />
+
+              <path id="fork-handle" class="fork-handle" d="M7 2v20" />
+            </g>
+
+            <!-- Knife -->
+            <g id="knife" class="knife">
+              <path
+                id="knife-blade"
+                class="knife-blade"
+                d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"
+              />
+            </g>
+          </g>
+        </g>
+
+        <!-- =========================================
+       WORDMARK
+  ========================================== -->
+        <g id="wordmark" class="wordmark">
+          <!-- DineMate -->
+          <text
+            id="dinemate-text"
+            class="wordmark-text dinemate-text"
+            x="74"
+            y="52"
+            font-family="Inter, 'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif"
+            font-size="20"
+            font-weight="700"
+            letter-spacing="-0.2"
+            fill="#0F172A"
+          >
+            DineMate
+          </text>
+
+          <!-- AI -->
+          <text
+            id="ai-text"
+            class="wordmark-text ai-text"
+            x="160"
+            y="52"
+            font-family="Inter, 'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif"
+            font-size="20"
+            font-weight="700"
+            letter-spacing="-0.2"
+            fill="#F97316"
+          >
+            AI
+          </text>
+        </g>
+      </svg>
+    </div>
+
     <header class="fixed top-0 left-0 right-0 z-50">
       <nav class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div
           class="mt-4 flex h-16 items-center justify-between rounded-2xl border border-slate-200/70 bg-[#FAF8F3]/85 px-4 sm:px-6 shadow-[0_8px_30px_rgba(11,31,51,0.06)] backdrop-blur-xl"
         >
-          <a href="#hmome" class="flex items-center gap-2.5">
+          <a href="#home" class="flex items-center gap-2.5">
             <div
               class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F97316] text-xl shadow-sm"
             >
@@ -74,7 +167,7 @@
               </span>
             </div>
           </a>
-          <div class="hidden items-center gap-8 lg:flex">
+          <div class="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
             <a
               href="#home"
               class="text-sm font-semibold text-[#F97316] transition-colors duration-300"
@@ -110,16 +203,16 @@
               About
             </a>
           </div>
-          <div class="hidden items-center gap-3 lg:flex">
+          <div class="relative flex items-center gap-3">
             <button
-              class="rounded-xl px-4 py-2.5 text-sm font-semibold text-[#0B1F33]/80 transition-all duration-300 hover:bg-white hover:text-[#0B1F33]"
+              class="hidden rounded-xl px-4 py-2.5 text-sm font-semibold text-[#0B1F33]/80 transition-all duration-300 hover:bg-white hover:text-[#0B1F33] lg:inline-flex"
             >
               Sign In
             </button>
 
             <a
               href="#ai-demo"
-              class="group flex items-center gap-2 rounded-xl bg-[#F97316] px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_20px_rgba(249,115,22,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#EA580C] hover:shadow-[0_10px_25px_rgba(249,115,22,0.3)]"
+              class="group hidden items-center gap-2 rounded-xl bg-[#F97316] px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_20px_rgba(249,115,22,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#EA580C] hover:shadow-[0_10px_25px_rgba(249,115,22,0.3)] lg:flex"
             >
               Get Recommendations
 
@@ -170,7 +263,7 @@
             </button>
             <div
               id="mobile-menu"
-              class="mt-2 hidden overflow-hidden rounded-2xl border border-slate-200/70 bg-[#FAF8F3]/95 p-4 shadow-[0_12px_35px_rgba(11,31,51,0.08)] backdrop-blur-xl lg:hidden"
+              class="absolute right-0 top-full z-50 mt-3 hidden w-[min(19rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-slate-200/70 bg-[#FAF8F3]/95 p-4 shadow-[0_12px_35px_rgba(11,31,51,0.14)] backdrop-blur-xl lg:hidden"
             >
               <div class="flex flex-col gap-1">
                 <a
@@ -229,7 +322,11 @@
       </nav>
     </header>
     <main>
-      <section id="home" class="relative overflow-hidden bg-[#FAF8F3]">
+      <section
+        id="home"
+        class="relative min-h-[100vh] overflow-hidden bg-[#FAF8F3]"
+        style="padding-top: 50px"
+      >
         <div
           class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[#F97316]/10 blur-3xl"
         ></div>
@@ -386,6 +483,7 @@
                   class="relative mt-5 h-52 overflow-hidden rounded-2xl bg-gradient-to-br from-[#F97316]/20 to-[#0B1F33]/20"
                 >
                   <div
+                    id="hero-background"
                     class="absolute inset-0 flex items-center justify-center"
                   >
                     <img
@@ -498,7 +596,7 @@
       </section>
       <section
         id="problem"
-        class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+        class="relative overflow-hidden bg-[#FAF8F3] py-20 sm:py-24 lg:py-28"
       >
         <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div class="mx-auto max-w-3xl text-center">
@@ -759,11 +857,23 @@
             </p>
           </div>
 
+          <div id="how-stage" class="how-stage">
+          <div id="how-progress-wrap" class="mx-auto mt-10 mb-8 flex max-w-2xl items-center gap-3 sm:mt-14 sm:mb-10" aria-label="How it works progress">
+            <span id="how-progress-label" class="shrink-0 text-xs font-bold text-[#EA580C]" aria-live="polite">Step 1 of 4</span>
+            <div class="h-2 flex-1 overflow-hidden rounded-full bg-orange-100">
+              <div
+                id="how-progress"
+                class="h-full w-full origin-left rounded-full bg-orange-500"
+              ></div>
+            </div>
+          </div>
+
           <div
-            class="relative mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-5"
+            id="how-steps-grid"
+            class="relative mt-6 grid gap-6 sm:mt-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-5"
           >
             <article
-              class="group relative rounded-[1.75rem] border border-[#0B1F33]/10 bg-white p-6 shadow-[0_10px_35px_rgba(11,31,51,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(11,31,51,0.1)] sm:p-7"
+              class="how-step group relative rounded-[1.75rem] border border-[#0B1F33]/10 bg-white p-6 shadow-[0_10px_35px_rgba(11,31,51,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(11,31,51,0.1)] sm:p-7"
             >
               <div class="flex items-center justify-between">
                 <div
@@ -774,7 +884,7 @@
               </div>
 
               <div
-                class="mt-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FB923C] text-2xl"
+                class="how-icon mt-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FB923C] text-2xl"
               >
                 ✎
               </div>
@@ -814,7 +924,7 @@
             </article>
 
             <article
-              class="group relative rounded-[1.75rem] border border-[#0B1F33]/10 bg-white p-6 shadow-[0_10px_35px_rgba(11,31,51,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(11,31,51,0.1)] sm:p-7"
+              class="how-step group relative rounded-[1.75rem] border border-[#0B1F33]/10 bg-white p-6 shadow-[0_10px_35px_rgba(11,31,51,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(11,31,51,0.1)] sm:p-7"
             >
               <div class="flex items-center justify-between">
                 <div
@@ -855,7 +965,7 @@
             </article>
 
             <article
-              class="group relative rounded-[1.75rem] border border-[#0B1F33]/10 bg-white p-6 shadow-[0_10px_35px_rgba(11,31,51,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(11,31,51,0.1)] sm:p-7"
+              class="how-step group relative rounded-[1.75rem] border border-[#0B1F33]/10 bg-white p-6 shadow-[0_10px_35px_rgba(11,31,51,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(11,31,51,0.1)] sm:p-7"
             >
               <div class="flex items-center justify-between">
                 <div
@@ -896,7 +1006,7 @@
             </article>
 
             <article
-              class="group relative rounded-[1.75rem] border border-[#0B1F33]/10 bg-white p-6 shadow-[0_10px_35px_rgba(11,31,51,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(11,31,51,0.1)] sm:p-7"
+              class="how-step group relative rounded-[1.75rem] border border-[#0B1F33]/10 bg-white p-6 shadow-[0_10px_35px_rgba(11,31,51,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(11,31,51,0.1)] sm:p-7"
             >
               <div class="flex items-center justify-between">
                 <div
@@ -940,6 +1050,7 @@
               </div>
             </article>
           </div>
+          </div>
 
           <div
             class="mx-auto mt-12 flex max-w-2xl flex-col items-center justify-center gap-3 text-center sm:flex-row"
@@ -950,7 +1061,7 @@
               ✦
             </span>
 
-            <p class="text-sm font-semibold text-[#0B1F33]/60">
+            <p id="how-summary" class="text-sm font-semibold text-[#0B1F33]/60">
               Your preferences do the talking.
               <span class="text-[#0B1F33]">
                 DineMate AI does the searching.
@@ -961,7 +1072,7 @@
       </section>
       <section
         id="features"
-        class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+        class="relative overflow-hidden bg-[#FAF8F3] py-20 sm:py-24 lg:py-28"
       >
         <div
           class="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#F97316]/5 blur-3xl"
@@ -996,10 +1107,10 @@
 
           <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
+              class="feature-card group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
+                class="feature-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
               >
                 💰
               </div>
@@ -1032,10 +1143,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
+              class="feature-card group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
+                class="feature-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
               >
                 🍜
               </div>
@@ -1073,10 +1184,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
+              class="feature-card group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
+                class="feature-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
               >
                 🥗
               </div>
@@ -1114,10 +1225,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
+              class="feature-card group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
+                class="feature-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
               >
                 📍
               </div>
@@ -1135,7 +1246,7 @@
 
               <div class="mt-6 flex items-center gap-3 rounded-xl bg-white p-3">
                 <div
-                  class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FFF7ED]"
+                  class="feature-icon flex h-8 w-8 items-center justify-center rounded-lg bg-[#FFF7ED]"
                 >
                   📍
                 </div>
@@ -1151,10 +1262,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
+              class="feature-card group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
+                class="feature-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
               >
                 🏮
               </div>
@@ -1192,10 +1303,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
+              class="feature-card group relative overflow-hidden rounded-[1.75rem] border border-[#0B1F33]/10 bg-[#FAF8F3] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/20 hover:shadow-[0_20px_50px_rgba(11,31,51,0.08)]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
+                class="feature-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFF7ED] text-2xl transition-all duration-300 group-hover:bg-[#F97316] group-hover:scale-105"
               >
                 👥
               </div>
@@ -1294,10 +1405,10 @@
 
           <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07] hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
+              class="traveller-card group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07] hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
+                class="traveller-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
               >
                 🎒
               </div>
@@ -1327,10 +1438,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
+              class="traveller-card group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
+                class="traveller-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
               >
                 👨‍👩‍👧‍👦
               </div>
@@ -1360,10 +1471,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
+              class="traveller-card group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
+                class="traveller-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
               >
                 💼
               </div>
@@ -1393,10 +1504,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
+              class="traveller-card group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
+                class="traveller-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
               >
                 🥗
               </div>
@@ -1432,10 +1543,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
+              class="traveller-card group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
+                class="traveller-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
               >
                 🇮🇳
               </div>
@@ -1465,10 +1576,10 @@
             </article>
 
             <article
-              class="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
+              class="traveller-card group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#F97316]/40 hover:bg-white/[0.07]"
             >
               <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
+                class="traveller-icon flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/10 text-2xl ring-1 ring-[#F97316]/20 transition-all duration-300 group-hover:bg-[#F97316] group-hover:ring-[#F97316]"
               >
                 ✈️
               </div>
@@ -1503,7 +1614,7 @@
           >
             <span class="text-[#FB923C]"> ✦ </span>
 
-            <p class="text-sm font-medium text-white/50">
+            <p id="traveller-summary" class="text-sm font-medium text-white/50">
               Different journeys.
               <span class="font-bold text-white">
                 One intelligent dining companion.
@@ -1514,7 +1625,7 @@
       </section>
       <section
         id="about"
-        class="relative overflow-hidden bg-white py-24 sm:py-28"
+        class="relative overflow-hidden bg-[#FAF8F3] py-24 sm:py-28"
       >
         <div
           class="pointer-events-none absolute -right-32 top-20 h-72 w-72 rounded-full bg-orange-100/60 blur-3xl"
@@ -1570,54 +1681,86 @@
                 </div>
 
                 <div class="mt-8 space-y-5">
+                  <!-- Cuisine -->
                   <div>
                     <div class="mb-2 flex justify-between text-sm">
                       <span class="text-slate-300">Cuisine Match</span>
-                      <span class="font-semibold text-orange-400">94%</span>
+
+                      <span
+                        class="preference-value font-semibold text-orange-400"
+                        data-value="94"
+                      >
+                        0%
+                      </span>
                     </div>
 
                     <div class="h-2 overflow-hidden rounded-full bg-white/10">
                       <div
-                        class="h-full w-[94%] rounded-full bg-orange-500"
+                        class="preference-bar h-full w-0 rounded-full bg-orange-500"
+                        data-width="94%"
                       ></div>
                     </div>
                   </div>
 
+                  <!-- Budget -->
                   <div>
                     <div class="mb-2 flex justify-between text-sm">
                       <span class="text-slate-300">Budget Match</span>
-                      <span class="font-semibold text-orange-400">89%</span>
+
+                      <span
+                        class="preference-value font-semibold text-orange-400"
+                        data-value="89"
+                      >
+                        0%
+                      </span>
                     </div>
 
                     <div class="h-2 overflow-hidden rounded-full bg-white/10">
                       <div
-                        class="h-full w-[89%] rounded-full bg-orange-500"
+                        class="preference-bar h-full w-0 rounded-full bg-orange-500"
+                        data-width="89%"
                       ></div>
                     </div>
                   </div>
 
+                  <!-- Dietary -->
                   <div>
                     <div class="mb-2 flex justify-between text-sm">
                       <span class="text-slate-300">Dietary Match</span>
-                      <span class="font-semibold text-orange-400">97%</span>
+
+                      <span
+                        class="preference-value font-semibold text-orange-400"
+                        data-value="97"
+                      >
+                        0%
+                      </span>
                     </div>
 
                     <div class="h-2 overflow-hidden rounded-full bg-white/10">
                       <div
-                        class="h-full w-[97%] rounded-full bg-orange-500"
+                        class="preference-bar h-full w-0 rounded-full bg-orange-500"
+                        data-width="97%"
                       ></div>
                     </div>
                   </div>
 
+                  <!-- Location -->
                   <div>
                     <div class="mb-2 flex justify-between text-sm">
                       <span class="text-slate-300">Location Match</span>
-                      <span class="font-semibold text-orange-400">92%</span>
+
+                      <span
+                        class="preference-value font-semibold text-orange-400"
+                        data-value="92"
+                      >
+                        0%
+                      </span>
                     </div>
 
                     <div class="h-2 overflow-hidden rounded-full bg-white/10">
                       <div
-                        class="h-full w-[92%] rounded-full bg-orange-500"
+                        class="preference-bar h-full w-0 rounded-full bg-orange-500"
+                        data-width="92%"
                       ></div>
                     </div>
                   </div>
@@ -1688,9 +1831,9 @@
                 </p>
               </div>
 
-              <div class="mt-8 space-y-5">
+              <div id="aboout-profile-card" class="mt-8 space-y-5">
                 <article
-                  class="group flex gap-4 rounded-2xl border border-slate-200 bg-[#FAF8F3] p-5 transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-lg"
+                  class="about-benefit group flex gap-4 rounded-2xl border border-slate-200 bg-[#FAF8F3] p-5 transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-lg"
                 >
                   <div
                     class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-100 text-xl"
@@ -1711,7 +1854,7 @@
                 </article>
 
                 <article
-                  class="group flex gap-4 rounded-2xl border border-slate-200 bg-[#FAF8F3] p-5 transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-lg"
+                  class="about-benefit group flex gap-4 rounded-2xl border border-slate-200 bg-[#FAF8F3] p-5 transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-lg"
                 >
                   <div
                     class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-100 text-xl"
@@ -1732,7 +1875,7 @@
                 </article>
 
                 <article
-                  class="group flex gap-4 rounded-2xl border border-slate-200 bg-[#FAF8F3] p-5 transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-lg"
+                  class="about-benefit group flex gap-4 rounded-2xl border border-slate-200 bg-[#FAF8F3] p-5 transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-lg"
                 >
                   <div
                     class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-100 text-xl"
@@ -1930,5 +2073,475 @@
         </div>
       </div>
     </footer>
+    <!-- AI Demo Modal -->
+    <section
+      id="ai-demo-modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center overflow-y-auto bg-[#0B1F33]/70 px-4 py-6 backdrop-blur-sm"
+      aria-hidden="true"
+    >
+      <!-- Demo Box -->
+      <div
+        id="ai-demo-box"
+        class="relative w-full max-w-[1500px] overflow-hidden rounded-[2rem] bg-[#FAF8F3] shadow-2xl"
+      >
+        <!-- Header -->
+        <div
+          class="flex items-center justify-between border-b border-slate-200 px-6 py-5 md:px-8"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500 text-white"
+            >
+              <!-- Robot SVG -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                class="h-6 w-6"
+              >
+                <path stroke-linecap="round" d="M12 3v2" />
+
+                <circle
+                  cx="12"
+                  cy="2.5"
+                  r="1"
+                  fill="currentColor"
+                  stroke="none"
+                />
+
+                <rect x="4" y="5" width="16" height="14" rx="4" />
+
+                <circle
+                  cx="9"
+                  cy="11"
+                  r="1"
+                  fill="currentColor"
+                  stroke="none"
+                />
+
+                <circle
+                  cx="15"
+                  cy="11"
+                  r="1"
+                  fill="currentColor"
+                  stroke="none"
+                />
+
+                <path stroke-linecap="round" d="M9 15c1.5 1 4.5 1 6 0" />
+              </svg>
+            </div>
+
+            <div>
+              <p
+                class="text-xs font-semibold uppercase tracking-widest text-orange-500"
+              >
+                DineMate AI
+              </p>
+
+              <h2 class="text-lg font-bold text-[#0B1F33]">
+                AI Recommendation Demo
+              </h2>
+            </div>
+          </div>
+
+          <!-- Close Button -->
+          <button
+            id="close-ai-demo"
+            type="button"
+            class="flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-[#0B1F33]"
+            aria-label="Close AI Demo"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!--
+    ============================================================
+    AI DEMO CONTENT
+    ============================================================
+    -->
+
+        <div class="p-6 md:p-8">
+          <!-- Main Demo Layout -->
+          <div
+            id="demo-layout"
+            class="demo-layout flex w-full items-stretch gap-7"
+          >
+            <!--
+        ========================================================
+        LEFT: PREFERENCES
+        ========================================================
+        -->
+
+            <div
+              id="demo-preferences"
+              class="demo-preferences w-full flex-shrink-0 lg:w-[420px]"
+            >
+              <!-- Preference Card -->
+              <div class="rounded-[2rem] bg-[#0B1F33] p-7 text-white">
+                <!-- Intro -->
+                <div class="mb-8">
+                  <div
+                    class="mb-3 flex items-center gap-2 text-sm font-semibold text-white/70"
+                  >
+                    <span class="h-2 w-2 rounded-full bg-orange-500"></span>
+
+                    AI Assistant
+                  </div>
+
+                  <h2 class="font-display text-4xl text-white">
+                    Tell us what you're looking for.
+                  </h2>
+
+                  <p class="mt-3 text-sm leading-6 text-white/60">
+                    Give DineMate a few details and we'll find restaurants that
+                    match your preferences.
+                  </p>
+                </div>
+
+                      <!--
+                  ====================================================
+                  PREFERENCES
+                  ====================================================
+                  -->
+
+                <div class="mt-8 grid gap-5 md:grid-cols-2">
+                  <!-- Location -->
+                  <div>
+                    <label class="mb-2 block text-sm font-semibold">
+                      📍 Location
+                    </label>
+
+                    <button
+                      id="demo-location-btn"
+                      type="button"
+                      class="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-left text-sm text-slate-300 transition hover:bg-white/15"
+                    >
+                      Use my current location
+                    </button>
+
+                    <p
+                      id="demo-location-status"
+                      class="mt-2 hidden text-xs text-orange-300"
+                    ></p>
+                  </div>
+
+                  <!-- Cuisine -->
+                  <div>
+                    <label
+                      for="demo-cuisine"
+                      class="mb-2 block text-sm font-semibold"
+                    >
+                      🍜 Cuisine
+                    </label>
+
+                    <select
+                      id="demo-cuisine"
+                      class="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none"
+                    >
+                      <option value="" class="text-black">Any cuisine</option>
+
+                      <option value="Indian" class="text-black">Indian</option>
+
+                      <option value="Italian" class="text-black">
+                        Italian
+                      </option>
+
+                      <option value="Chinese" class="text-black">
+                        Chinese
+                      </option>
+
+                      <option value="Asian" class="text-black">Asian</option>
+
+                      <option value="Mexican" class="text-black">
+                        Mexican
+                      </option>
+                    </select>
+                  </div>
+
+                  <!-- Budget -->
+                  <div>
+                    <label
+                      for="demo-budget"
+                      class="mb-2 block text-sm font-semibold"
+                    >
+                      💰 Budget
+                    </label>
+
+                    <select
+                      id="demo-budget"
+                      class="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none"
+                    >
+                      <option value="" class="text-black">Any budget</option>
+
+                      <option value="budget" class="text-black">
+                        ₹300 – ₹700
+                      </option>
+
+                      <option value="moderate" class="text-black">
+                        ₹700 – ₹1500
+                      </option>
+
+                      <option value="premium" class="text-black">₹1500+</option>
+                    </select>
+                  </div>
+
+                  <!-- Dietary -->
+                  <div>
+                    <label
+                      for="demo-dietary"
+                      class="mb-2 block text-sm font-semibold"
+                    >
+                      🥗 Dietary preference
+                    </label>
+
+                    <select
+                      id="demo-dietary"
+                      class="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none"
+                    >
+                      <option value="" class="text-black">No preference</option>
+
+                      <option value="vegetarian" class="text-black">
+                        Vegetarian
+                      </option>
+
+                      <option value="vegan" class="text-black">Vegan</option>
+
+                      <option value="gluten free" class="text-black">
+                        Gluten Free
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                    <!--
+                ====================================================
+                GROUP SIZE
+                ====================================================
+                -->
+
+                <div class="mt-5">
+                  <label class="mb-3 block text-sm font-semibold">
+                    👥 Group size
+                  </label>
+
+                  <div id="demo-group-size" class="grid grid-cols-4 gap-2">
+                    <button
+                      type="button"
+                      data-group="1"
+                      class="group-option rounded-xl border border-white/10 bg-white/10 py-3 text-sm font-semibold transition hover:bg-orange-500"
+                    >
+                      1
+                    </button>
+
+                    <button
+                      type="button"
+                      data-group="2"
+                      class="group-option rounded-xl border border-white/10 bg-white/10 py-3 text-sm font-semibold transition hover:bg-orange-500"
+                    >
+                      2
+                    </button>
+
+                    <button
+                      type="button"
+                      data-group="4"
+                      class="group-option rounded-xl border border-white/10 bg-white/10 py-3 text-sm font-semibold transition hover:bg-orange-500"
+                    >
+                      4
+                    </button>
+
+                    <button
+                      type="button"
+                      data-group="6+"
+                      class="group-option rounded-xl border border-white/10 bg-white/10 py-3 text-sm font-semibold transition hover:bg-orange-500"
+                    >
+                      6+
+                    </button>
+                  </div>
+                </div>
+
+                    <!--
+                ====================================================
+                FIND BUTTON
+                ====================================================
+                -->
+
+                <button
+                  id="find-restaurants-btn"
+                  class="mt-6 flex w-full items-center justify-center gap-3 rounded-2xl bg-orange-500 px-6 py-4 font-bold text-white transition hover:bg-orange-600"
+                >
+                  <span> Find My Restaurants </span>
+
+                  <span> → </span>
+                </button>
+              </div>
+            </div>
+
+            <!--
+        ========================================================
+        RIGHT: RESTAURANT RESULTS
+        ========================================================
+        -->
+
+            <!-- <div
+              id="restaurant-results"
+              class="restaurant-results min-w-0 flex-1 hidden"
+            > -->
+              <!-- Results Header -->
+              <!-- <div class="mb-6">
+                <div class="flex items-center gap-3">
+                  <span
+                    class="rounded-full bg-orange-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange-600"
+                  >
+                    Step 2
+                  </span>
+
+                  <span class="text-sm text-slate-400">
+                    AI Recommended Results
+                  </span>
+                </div>
+
+                <h2 class="mt-3 text-4xl font-bold text-[#0B1F33]">
+                  Restaurants
+                  <span class="text-orange-500"> for You </span>
+                </h2>
+
+                <p id="results-summary" class="mt-1 text-sm text-slate-500">
+                  Based on your preferences.
+                </p>
+              </div> -->
+
+              <!--
+          ======================================================
+          RESTAURANT RESULTS GRID
+          ======================================================
+          -->
+
+              <!-- <div
+                id="restaurant-results-grid"
+                class="grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3"
+              ></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <a
+      href="#"
+      id="ai-demo-button"
+      aria-label="Get AI demo"
+      class="fixed bottom-20 right-4 z-50 inline-flex items-center gap-0 rounded-full bg-[#0B1F33] px-3 py-3 text-sm font-semibold text-white shadow-xl transition-all duration-300 hover:gap-3 hover:-translate-y-1 hover:bg-[#16344D] focus-visible:gap-3 sm:right-6 md:bottom-20 md:right-15"
+    >
+      <span
+        class="flex h-8 w-8 items-center justify-center rounded-full bg-orange-500"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          class="h-5 w-5 text-white"
+        >
+          <!-- Antenna -->
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2" />
+
+          <!-- Antenna dot -->
+          <circle cx="12" cy="2.5" r="1" fill="currentColor" stroke="none" />
+
+          <!-- Robot head -->
+          <rect x="4" y="5" width="16" height="14" rx="4" />
+
+          <!-- Eyes -->
+          <circle cx="9" cy="11" r="1" fill="currentColor" stroke="none" />
+          <circle cx="15" cy="11" r="1" fill="currentColor" stroke="none" />
+
+          <!-- Smile -->
+          <path stroke-linecap="round" d="M9 15c1.5 1 4.5 1 6 0" />
+
+          <!-- Side details -->
+          <path stroke-linecap="round" d="M4 10H2.5M20 10h1.5" />
+        </svg>
+      </span>
+
+      <span class="ai-demo-button-label">Get AI Demo</span>
+    </a>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="back-to-top" hidden>↑</button>
+    <script>
+      ((g) => {
+        var h,
+          a,
+          k,
+          p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement("script"));
+
+              e.set("libraries", [...r] + "");
+
+              for (k in g) {
+                e.set(
+                  k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+                  g[k],
+                );
+              }
+
+              e.set("callback", c + ".maps." + q);
+
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+
+              d[q] = f;
+
+              a.onerror = () => (h = n(Error(p + " could not load.")));
+
+              m.head.append(a);
+            }));
+
+        d[l]
+          ? console.warn(p + " only loads once.")
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({
+        key: "AIzaSyC0jKGK6lrpjUNdjXxyHiVp0npKQ6iA6oQ",
+        v: "weekly",
+      });
+    </script>
+    <script>
+      const tl = gsap.timeline();
+
+      tl.from("#icon-background", {
+        scale: 0,
+        transformOrigin: "center",
+        duration: 0.6,
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

@@ -1,54 +1,384 @@
 html {
-        scroll-behavior: smooth;
-      }
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
 
-      body {
-        font-family: "Inter", sans-serif;
-        background: #faf8f3;
-      }
+body {
+  font-family: "Inter", sans-serif;
+  background: #faf8f3;
+}
 
-      .font-display {
-        font-family: "DM Serif Display", serif;
-      }
-      ::selection {
-        background: #f97316;
-        color: white;
-      }
 
-      @keyframes badge-float-left {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
+.font-display {
+  font-family: "DM Serif Display", serif;
+}
 
-        50% {
-          transform: translateY(-14px);
-        }
-      }
+::selection {
+  background: #f97316;
+  color: white;
+}
 
-      @keyframes badge-float-right {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
+@keyframes badge-float-left {
 
-        50% {
-          transform: translateY(14px);
-        }
-      }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
 
-      .float-budget {
-        animation: badge-float-left 4s ease-in-out infinite;
-      }
+  50% {
+    transform: translateY(-14px);
+  }
+}
 
-      .float-dietary {
-        animation: badge-float-right 4.5s ease-in-out infinite;
-      }
+@keyframes badge-float-right {
 
-      /* Respect reduced-motion accessibility */
-      @media (prefers-reduced-motion: reduce) {
-        .float-budget,
-        .float-dietary {
-          animation: none;
-        }
-      }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(14px);
+  }
+}
+
+.float-budget {
+  animation: badge-float-left 4s ease-in-out infinite;
+}
+
+.float-dietary {
+  animation: badge-float-right 4.5s ease-in-out infinite;
+}
+
+/* Respect reduced-motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  .float-budget,
+  .float-dietary {
+    animation: none;
+  }
+}
+
+/* =========================================
+   SCROLL ANIMATION BASE STATES
+========================================= */
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-70px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(70px);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(12px);
+}
+
+.card-hover {
+  will-change: transform;
+}
+
+.how-step {
+  will-change: transform, opacity, box-shadow;
+  opacity: 0;
+}
+
+.how-step.is-active {
+  border-color: #F97316 !important;
+  box-shadow: 0 20px 50px rgba(249, 115, 22, 0.12);
+}
+
+.feature-card {
+  will-change: transform;
+}
+
+.feature-icon {
+  will-change: transform;
+}
+
+.traveller-card {
+  will-change: transform, opacity;
+}
+
+.traveller-icon {
+  will-change: transform, opacity;
+}
+
+/* ================================
+   DineMate Loader
+================================ */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FAF8F3;
+}
+
+#dinemate-loader {
+  overflow: visible;
+}
+
+/* Prevent SVG text from looking visible before animation */
+#dinemate-loader .wordmark-text {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #loader {
+    display: none;
+  }
+}
+
+
+.restaurant-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(11, 31, 51, 0.10);
+  border-color: #FDBA74;
+}
+
+.restaurant-card-image {
+  background:
+    linear-gradient(135deg,
+      #FFF7ED,
+      #FFEDD5);
+}
+
+.match-ring {
+  box-shadow:
+    0 0 0 4px rgba(249, 115, 22, 0.10);
+}
+
+.restaurant-tag {
+  white-space: nowrap;
+}
+
+/* =========================================
+   DineMate AI Demo
+========================================= */
+
+.demo-layout {
+  position: relative;
+  width: 100%;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+
+/* Preference card */
+
+.demo-preferences {
+  width: 420px;
+  flex: 0 0 420px;
+  position: relative;
+  /* z-index: 5; */
+}
+
+
+/* Restaurant results */
+
+.restaurant-results {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: calc(100% - 450px);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateX(80px);
+
+  /* pointer-events: none; */
+
+  /* z-index: 2; */
+}
+
+
+/* =========================================
+   Restaurant grid
+========================================= */
+
+#restaurant-results-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .demo-layout {
+    min-height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .demo-preferences {
+    width: 100%;
+    flex: none;
+  }
+
+  .restaurant-results {
+    position: relative;
+    top: auto;
+    right: auto;
+
+    width: 100%;
+
+    margin-top: 30px;
+  }
+
+  #restaurant-results-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 640px) {
+
+  #restaurant-results-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive navigation feedback and accessible focus states */
+:focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: 3px;
+}
+
+.nav-link-active {
+  color: #f97316 !important;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 3.6rem;
+  bottom: 10rem;
+  z-index: 49;
+  border: 0;
+  border-radius: 9999px;
+  background: #f97316;
+  color: white;
+  padding: 0.95rem 1.25rem;
+  font: inherit;
+  font-weight: 700;
+  box-shadow: 0 8px 24px #0b1f3330;
+  cursor: pointer;
+}
+
+.back-to-top[hidden] {
+  display: none;
+}
+
+#ai-demo-button .ai-demo-button-label {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: max-width 600ms ease, opacity 180ms ease;
+}
+
+#ai-demo-button:hover .ai-demo-button-label,
+#ai-demo-button:focus-visible .ai-demo-button-label {
+  max-width: 7rem;
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  #ai-demo-button {
+    max-width: calc(100vw - 2rem);
+  }
+
+  #ai-demo-button>span:last-child {
+    white-space: nowrap;
+  }
+
+  #ai-demo-modal {
+    align-items: flex-start;
+    padding: 0.75rem;
+  }
+
+  #ai-demo-box {
+    border-radius: 1.25rem;
+  }
+
+  #ai-demo-box>div:last-child {
+    padding: 1rem;
+  }
+
+  .demo-layout {
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .demo-preferences>div {
+    padding: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #how-stage { min-height: 0; }
+  #how-steps-grid {
+    position: relative;
+    display: block;
+    height: min(440px, calc(100svh - 190px));
+    min-height: 390px;
+    margin-top: 1rem;
+  }
+  #how-steps-grid .how-step {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+}
